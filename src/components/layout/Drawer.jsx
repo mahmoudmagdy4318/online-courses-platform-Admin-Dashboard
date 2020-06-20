@@ -127,7 +127,7 @@ export default function NavBar(props) {
             Administration
           </Typography>
           <Typography variant="h6" noWrap style={{ marginLeft: 1100 }}>
-            {eval(currentUser.email)}
+            {currentUser && eval(currentUser.email)}
           </Typography>
         </Toolbar>
       </AppBar>
