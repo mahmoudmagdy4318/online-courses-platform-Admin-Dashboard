@@ -4,7 +4,7 @@ import { toast } from "react-toastify";
 import { getToken, removeToken } from "../services/tokenService";
 
 const axiosInstance = axios.create({
-  baseURL: "/",
+  baseURL: "https://quiet-anchorage-98361.herokuapp.com/",
 });
 
 axiosInstance.interceptors.request.use((cfg) => {
