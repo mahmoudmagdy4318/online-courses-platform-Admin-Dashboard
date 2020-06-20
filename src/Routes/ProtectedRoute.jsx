@@ -1,18 +1,27 @@
 import React from "react";
-import { Route, Redirect } from "react-router-dom";
+import { Route, Redirect, useHistory } from "react-router-dom";
 import axiosInstance from "../API/axiosInstance";
 import { getToken } from "../services/tokenService";
 import { useEffect } from "react";
 
-const ProtectedRoute = (props) => {
+const ProtectedRoute = ({ component: Component, render, ...rest }) => {
+  const history = useHistory();
   useEffect(() => {
-    const token = getToken();
-    if (!token) return <Redirect to={{ pathname: "/login" }} />;
     axiosInstance.get("admin").catch((error) => {
-      console.error({ error });
+      history.push("/login");
     });
   }, []);
 
-  return <Route {...props} />;
+  return (
+    <Route
+      {...rest}
+      render={(props) => {
+        if (!getToken()) {
+          return <Redirect to={{ pathname: "/login" }} />;
+        }
+        return Component ? <Component {...props} /> : render(props);
+      }}
+    />
+  );
 };
 export default ProtectedRoute;

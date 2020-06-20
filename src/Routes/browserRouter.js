@@ -17,51 +17,46 @@ function Router(props) {
       <Switch>
         <Route key="login" exact path="/login" render={() => <Login />} />
         <Route key="logout" exact path="/logout" render={() => <Logout />} />
-        <ProtectedRoute
-          key="home"
-          exact
-          path="/"
-          render={() => <Dashboard />}
-        />
+        <ProtectedRoute key="home" exact path="/" component={<Dashboard />} />
         <ProtectedRoute
           key="admin"
           exact
           path="/admin"
-          render={() => <NewAdmin />}
+          component={<NewAdmin />}
         />
         <ProtectedRoute
           key="users"
           exact
           path="/users"
-          render={() => <UsersList />}
+          component={<UsersList />}
         />
         <ProtectedRoute
           key="categories"
           exact
           path="/categories"
-          render={() => <Categories />}
+          component={<Categories />}
         />
         <ProtectedRoute
           key="courses"
           exact
           path="/courses"
-          render={() => <Courses />}
+          component={<Courses />}
         />
-        <Route
+        <ProtectedRoute
           key="add course"
           exact
           path="/courses/add"
           render={() => <CourseForm />}
         />
-        <Route
-          key="add course"
+        <ProtectedRoute
+          key="edit course"
           exact
           path="/courses/edit/:id"
           render={(routeprops) => (
             <CourseForm id={routeprops.match.params.id} />
           )}
         />
-        <Route
+        <ProtectedRoute
           key="course"
           exact
           path="/courses/:id"
